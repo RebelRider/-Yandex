@@ -1,0 +1,39 @@
+import Foundation
+
+func calculateLength(_ n: Int, _ segments: [(Int, Int)]) -> Int {
+    var length = 0
+    var sortedSegments = segments.sorted { $0.0 < $1.0 }
+    
+    var currentSegment = sortedSegments[0]
+    for i in 1..<n {
+        if sortedSegments[i].0 <= currentSegment.1 {
+            currentSegment.1 = max(currentSegment.1, sortedSegments[i].1)
+        } else {
+            length += currentSegment.1 - currentSegment.0
+            currentSegment = sortedSegments[i]
+        }
+    }
+    length += currentSegment.1 - currentSegment.0
+    
+    return length
+}
+
+func mainF() {
+    guard let n = readLine(), let nInt = Int(n) else {
+        print("Invalid input")
+        return
+    }
+    
+    var segments = [(Int, Int)]()
+    for _ in 0..<nInt {
+        guard let segment = readLine()?.split(separator: " ").map({ Int($0)! }) else {
+            print("Invalid input")
+            return
+        }
+        segments.append((segment[0], segment[1]))
+    }
+    
+    print(calculateLength(nInt, segments))
+}
+
+mainF()

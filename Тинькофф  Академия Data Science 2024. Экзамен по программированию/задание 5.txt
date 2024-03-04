@@ -1,0 +1,27 @@
+import Foundation
+
+let input = readLine()!.split(separator: " ").map { Int($0)! }
+let (N, M) = (input[0], input[1])
+var field = Array(repeating: Array(repeating: 0, count: M), count: N)
+
+let W = Int(readLine()!)!
+for _ in 0..<W {
+    let mine = readLine()!.split(separator: " ").map { Int($0)! - 1 }
+    field[mine[0]][mine[1]] = -1
+    for dx in -1...1 {
+        for dy in -1...1 {
+            let nx = mine[0] + dx
+            let ny = mine[1] + dy
+            if nx >= 0 && nx < N && ny >= 0 && ny < M && field[nx][ny] != -1 {
+                field[nx][ny] += 1
+            }
+        }
+    }
+}
+
+for i in 0..<N {
+    for j in 0..<M {
+        print(field[i][j] == -1 ? "*" : String(field[i][j]), terminator: " ")
+    }
+    print()
+}

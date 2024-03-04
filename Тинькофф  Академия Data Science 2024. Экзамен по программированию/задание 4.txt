@@ -1,0 +1,26 @@
+import Foundation
+
+func calculatePassword(l: Int, r: Int) -> Int {
+    var password = 0
+    if l <= r {
+        for a in l...r {
+            for b in l...r {
+                password += Int(pow(Double(a), Double(b))) * (a - 1)
+            }
+        }
+    }
+    return password
+}
+
+let t = Int(readLine()!)!
+var results = [Int]()
+for _ in 1...t {
+    let lr = readLine()!.split(separator: " ").map { Int($0)! }
+    let l = lr[0]
+    let r = lr[1]
+    results.append(calculatePassword(l: l, r: r))
+}
+
+for result in results {
+    print(result)
+}

@@ -1,0 +1,29 @@
+import Foundation
+
+func countErrors(_ n: Int, _ teams: [Int]) -> Int {
+    var errors = 0
+    for i in 0..<n {
+        for j in (i+1)..<n {
+            if teams[i] > teams[j] {
+                errors += 1
+            }
+        }
+    }
+    return errors
+}
+
+func mainF() {
+    guard let n = readLine(), let nInt = Int(n) else {
+        print("Invalid input")
+        return
+    }
+    
+    guard let teams = readLine()?.split(separator: " ").map({ Int($0)! }) else {
+        print("Invalid input")
+        return
+    }
+    
+    print(countErrors(nInt, teams))
+}
+
+mainF()

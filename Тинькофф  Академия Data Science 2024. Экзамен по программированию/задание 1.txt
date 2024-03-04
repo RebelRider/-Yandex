@@ -1,0 +1,30 @@
+import Foundation
+
+func isPasswordStrong() -> String {
+    guard let password = readLine() else {
+        return "NO"
+    }
+    
+    if password.count < 8 {
+        return "NO"
+    }
+    
+    let digits = CharacterSet.decimalDigits
+    if password.rangeOfCharacter(from: digits) == nil {
+        return "NO"
+    }
+    
+    let lowercaseLetters = CharacterSet.lowercaseLetters
+    if password.rangeOfCharacter(from: lowercaseLetters) == nil {
+        return "NO"
+    }
+    
+    let uppercaseLetters = CharacterSet.uppercaseLetters
+    if password.rangeOfCharacter(from: uppercaseLetters) == nil {
+        return "NO"
+    }
+    
+    return "YES"
+}
+
+print(isPasswordStrong())
